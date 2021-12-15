@@ -1,0 +1,83 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+/*------Grid Container---------*/
+.gridContainer {
+  max-height: 50%;
+  max-width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  border: gray 1px solid;
+}
+
+.cell {
+  background-color: lightgray;
+  width: 50px;
+  height: 50px;
+  
+  border: gray 1px solid;
+}
+
+
+/*---------------Color Display------------*/
+.colorEditor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#colorHeader{
+    text-align: center;
+}
+
+/* color buttons  */
+#buttonDisplay{
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+}
+
+#displayColors{
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+}
+
+.colorButton {
+  height: 50px;
+  width: 50px;
+}
+
+#red {
+  background-color: red;
+}
+
+#blue {
+  background-color: blue;
+}
+
+#green {
+  background-color: green;
+}
+
+#yellow {
+  background-color: yellow;
+}
+
+#violet {
+  background-color: violet;
+}
+
+/* Other Buttons */
+#otherControls{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+
+}
