@@ -7,13 +7,14 @@ let yellowButton = document.getElementById("yellow");
 let violetButton = document.getElementById("violet");
 let currentColor = document.getElementById("currentColor");
 //All color buttons
-let colorButtons = document.getElementsByClassName("colorButton");
+let colorButtons = document.querySelectorAll("button.colorButton")
 //Other controls
 let startButton = document.getElementById("start");
 let clearBoardButton = document.getElementById("clearBoard");
-//let clearCellButton = document.getElementById("clearCell");
+let clearCellButton = document.getElementById("clearCell");
 //Grid cells
-let gridCells = document.getElementsByClassName("cell");
+let gridCells = document.querySelectorAll("div.cell");
+let topLeftCell = document.getElementsByClassName("cell cell-1");
 
 /* -------------- Click Events ------------- */
 //Color button clicks
@@ -45,9 +46,13 @@ startButton.addEventListener("click", () => {
 clearBoardButton.addEventListener("click", () => {
   startPixelArtGame(event);
 });
-//clearCellButton.addEventListener("click", () => {
-//})
+clearCellButton.addEventListener("click", () => {
+    playPixelArtGame(event);
+});
 ////When grid cells are clicked
+//topLeftCell.addEventListener("click", () => {
+//    playPixelArtGame(event);
+//});
 //gridCells.addEventListener("click", () => {
 //});
 
@@ -73,8 +78,11 @@ startButton.addEventListener("click", startPixelArtGame);
 
 function playPixelArtGame(event) {
   event.preventDefault();
+  //topLeftCell.disabled = false;
   gridCells.disabled = false;
-  if (currentColor.textContent === "Red") {
+  if (event.target === clearCellButton) {
+    alert("You cleared the cell. ");
+  } else if (currentColor.textContent === "Red") {
     alert("Your color is red. ");
   } else if (currentColor.textContent === "Blue") {
     alert("Your color is blue. ");
@@ -84,9 +92,7 @@ function playPixelArtGame(event) {
     alert("Your color is yellow. ");
   } else if (currentColor.textContent === "Violet") {
     alert("Your color is violet. ");
-  } else if (event.target === clearCellButton) {
-    alert("You cleared the cell. ");
-  } 
+  }
   //else if (event.target === gridCells) {
   //alert("You clicked on a grid cell. ")
   //}
