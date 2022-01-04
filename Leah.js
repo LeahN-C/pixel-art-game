@@ -7,97 +7,121 @@ let yellowButton = document.getElementById("yellow");
 let violetButton = document.getElementById("violet");
 let currentColor = document.getElementById("currentColor");
 //All color buttons
-let colorButtons = document.querySelectorAll("button.colorButton")
+let colorButtons = document.querySelectorAll(".colorButton");
+//I NEED TO FIGURE OUT A WAY TO ACCESS ALL 5 COLORS
+//for (let buttonNumbers = 0; buttonNumbers <colorButtons.length; buttonNumbers)
 //Other controls
 let startButton = document.getElementById("start");
 let clearBoardButton = document.getElementById("clearBoard");
 let clearCellButton = document.getElementById("clearCell");
-//Grid cells
-let gridCells = document.querySelectorAll("div.cell");
-let topLeftCell = document.getElementsByClassName("cell cell-1");
+//All grid cells
+let gridCells = document.querySelectorAll(".cell");
 
 /* -------------- Click Events ------------- */
 //Color button clicks
 redButton.addEventListener("click", () => {
-  currentColor.textContent = "Red";
+  currentColor.textContent = "Current Color: Red";
   playPixelArtGame(event);
 });
 blueButton.addEventListener("click", () => {
-  currentColor.textContent = "Blue";
+  currentColor.textContent = "Current Color: Blue";
   playPixelArtGame(event);
 });
 greenButton.addEventListener("click", () => {
-  currentColor.textContent = "Green";
+  currentColor.textContent = "Current Color: Green";
   playPixelArtGame(event);
 });
 yellowButton.addEventListener("click", () => {
-  currentColor.textContent = "Yellow";
+  currentColor.textContent = "Current Color: Yellow";
   playPixelArtGame(event);
 });
 violetButton.addEventListener("click", () => {
-  currentColor.textContent = "Violet";
+  currentColor.textContent = "Current Color: Violet";
   playPixelArtGame(event);
 });
 //Other contol button clicks
 startButton.addEventListener("click", () => {
-  currentColor.textContent = "Black";
+  currentColor.textContent = "Current Color: Black";
   playPixelArtGame(event);
 });
 clearBoardButton.addEventListener("click", () => {
-  startPixelArtGame(event);
+   let answer = window.confirm("Are you sure you want to clear the board? ");
+        if (answer) {
+            startPixelArtGame(event);
+        } else {
+            playPixelArtGame();
+        }
+
 });
 clearCellButton.addEventListener("click", () => {
-    playPixelArtGame(event);
+    currentColor.textContent = "Click any cell to reset color"
+  playPixelArtGame(event);
 });
-////When grid cells are clicked
-//topLeftCell.addEventListener("click", () => {
-//    playPixelArtGame(event);
-//});
-//gridCells.addEventListener("click", () => {
-//});
 
+/* ----- Starting Board, before game starts ------ */
+//All buttons except "start" disabled
+clearBoardButton.disabled = true;
+clearCellButton.disabled = true;
+
+/* ---------------- Functions --------------- */
+//Calling the Function
+startButton.addEventListener("click", startPixelArtGame);
+//Function to start the game and enable buttons
 function startPixelArtGame(event) {
+  //Preventing page from refreshing
   event.preventDefault();
-  startButton.disabled = false;
+  startButton.disabled = true;
   if (event.target === startButton) {
-    alert("You started the game! ");
+    //Start button is disabled & other buttons are enabled
     startButton.disabled = true;
+    clearBoardButton.disabled = false;
+    clearCellButton.disabled = false;
     currentColor.disabled = false;
     redButton.disabled = false;
     blueButton.disabled = false;
     greenButton.disabled = false;
     yellowButton.disabled = false;
     violetButton.disabled = false;
-    //playPixelArtGame();
   } else if (event.target === clearBoardButton) {
-    alert("You are now clearing the board. ");
+    gridCells.forEach((gridCell) => {
+        gridCell.style.background = 'lightGrey'
+      })
   }
 }
-
-startButton.addEventListener("click", startPixelArtGame);
-
+//Function to play the game once start button is clicked
 function playPixelArtGame(event) {
+  //Preventing page from refreshing
   event.preventDefault();
-  //topLeftCell.disabled = false;
+  //User can now click on the grid cells
   gridCells.disabled = false;
-  if (event.target === clearCellButton) {
-    alert("You cleared the cell. ");
-  } else if (currentColor.textContent === "Red") {
-    alert("Your color is red. ");
-  } else if (currentColor.textContent === "Blue") {
-    alert("Your color is blue. ");
-  } else if (currentColor.textContent === "Green") {
-    alert("Your color is green. ");
-  } else if (currentColor.textContent === "Yellow") {
-    alert("Your color is yellow. ");
-  } else if (currentColor.textContent === "Violet") {
-    alert("Your color is violet. ");
-  }
-  //else if (event.target === gridCells) {
-  //alert("You clicked on a grid cell. ")
-  //}
+  //When the grid cells are clicked
+  gridCells.forEach((oneCell) => {
+    oneCell.addEventListener("click", () => {
+      oneCell.style.background = "black";
+      //If user clicks on "clear cell" button & then clicks a cell to clear it
+      if (event.target === clearCellButton) {
+        oneCell.style.backgroundColor = "lightGrey";
+      }
+      //If user clicks on red
+      else if (currentColor.textContent === "Current Color: Red") {
+        oneCell.style.backgroundColor = "red";
+      }
+      //If user clicks on blue
+      else if (currentColor.textContent === "Current Color: Blue") {
+        oneCell.style.backgroundColor = "blue";
+      }
+      //If user clicks on green
+      else if (currentColor.textContent === "Current Color: Green") {
+        oneCell.style.backgroundColor = "green";
+      }
+      //If user clicks on yellow
+      else if (currentColor.textContent === "Current Color: Yellow") {
+        oneCell.style.backgroundColor = "yellow";
+      }
+      //If user clicks on violet
+      else if (currentColor.textContent === "Current Color: Violet") {
+        oneCell.style.backgroundColor = "violet";
+      }
+    });
+  });
 }
-
-colorButtons.addEventListener("click", playPixelArtGame);
-gridCells.addEventListener("click", playPixelArtGame);
-//clearBoardButton.addEventListener("click", startPixelArtGame)
